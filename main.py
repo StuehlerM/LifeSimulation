@@ -3,7 +3,6 @@ from world_gen import generate_world
 from agent import Agent
 import config
 import random
-import noise
 
 # Initialize Pygame
 pygame.init()
@@ -19,6 +18,9 @@ agents = [Agent(random.randint(0, config.WORLD_WIDTH), random.randint(0, config.
 
 # Create a surface for the world
 world_surface = pygame.Surface((config.WORLD_WIDTH * config.CELL_SIZE, config.WORLD_HEIGHT * config.CELL_SIZE))
+
+clock = pygame.time.Clock()
+deltaTime = 0
 
 # Draw world onto surface
 for i in range(config.WORLD_WIDTH):
@@ -41,6 +43,7 @@ if(config.RENDER_GRID):
 
 # Game loop
 running = True
+
 while running:
     # Event handling
     for event in pygame.event.get():
@@ -49,19 +52,11 @@ while running:
 
     # Draw world surface onto screen
     win.blit(world_surface, (0, 0))
-
-    # Game logic goes here
+    deltaTime = clock.tick(config.FPS) / 1000  # Time in seconds
         
     # Update and draw each agent
     for agent in agents:
-        cell = agent.sense(world)
-        
-        if cell is not None:
-            cell_value = cell.cell_type
-        else:
-            cell_value = config.CellType.LAND
-
-        agent.move(cell_value)
+        agent.live(world, deltaTime)
         agent.draw(win)
 
     # Draw/update screen

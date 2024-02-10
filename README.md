@@ -40,3 +40,17 @@ This project involves creating a simulated world with agents that can interact w
 
 - Try to implement a self-improving AI.
 - This is a complex task and might involve advanced AI concepts like meta-learning.
+
+
+## How to Run
+
+Before running the project, make sure you have Python installed on your system. If not, you can download it from [here](https://www.python.org/downloads/).
+
+Next, install the required packages. You can do this by running the following commands in your terminal:
+
+```bash
+pip install pygame
+pip install numpy
+pip install matplotlib
+pip install perlin-noise
+pip install Enum

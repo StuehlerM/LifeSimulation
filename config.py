@@ -17,6 +17,8 @@ CELL_SIZE = 10
 # 50.0 is a good value for the default world size
 SCALE = 50.0  
 
+FPS = 60
+
 # Calculate grid size
 GRID_WIDTH = WORLD_WIDTH // CELL_SIZE
 GRID_HEIGHT = WORLD_HEIGHT // CELL_SIZE
@@ -27,17 +29,28 @@ OCTAVES = 3
 
 RENDER_GRID = False
 
+WATER_SPEED_REDUCTION = 0.4
+DROWNING_HEALTH_DECREMENT = 10
+EATING_HEALTH_INCREMENT = 10
+AGENT_MAX_HEALTH = 100
+
 # Define cell types
 class CellType(Enum):
     WATER = 0
     DESERT = 1
     LAND = 2
     GRASS = 3
+    
+class Agent(Enum):
+    Alive = 1
+    Dead = 0
 
 # Define colors
 COLORS = {
     CellType.WATER: (0, 0, 255),   # Blue
     CellType.DESERT: (205, 133, 63),  # Brownish Yellow
     CellType.LAND: (0, 195, 0),  # Green
-    CellType.GRASS: (0, 128, 0)  # Dark Green
+    CellType.GRASS: (0, 128, 0),  # Dark Green
+    Agent.Alive: (255, 0, 0), # Red
+    Agent.Dead: (0, 0, 0)  # Black
 }
